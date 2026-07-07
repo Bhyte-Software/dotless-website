@@ -32,7 +32,7 @@ export default function RootLayout({
       lang="en"
       className={cn("h-full", "antialiased", roboto.variable, robotoSerif.variable, "font-sans")}
     >
-      <body className="min-h-full flex flex-col">
+      <body className="flex flex-col">
         <Navigation />
         <main>
           {children}
