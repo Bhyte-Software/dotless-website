@@ -1,6 +1,9 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
 
+import { useScrollTo } from "@/hooks/use-scroll-to";
 import { cn } from "@/lib/utils";
 
 const BENEFITS = [
@@ -49,9 +52,12 @@ const BENEFITS = [
 ] as const;
 
 function ContactButton() {
+  const handleClick = useScrollTo("contact-us");
+
   return (
     <Link
-      href="/contact-us"
+      href="#contact-us"
+      onClick={handleClick}
       className="group/button relative flex min-h-24 w-full items-center justify-center overflow-hidden bg-secondary text-base font-medium"
     >
       <span className="relative z-10 h-5 overflow-hidden font-heading text-secondary-foreground transition-colors duration-300 ease-out group-hover/button:text-primary-foreground">
@@ -70,7 +76,7 @@ function ContactButton() {
 
 const Benefits = () => {
   return (
-    <section className="relative w-full overflow-hidden bg-primary py-20 lg:py-40">
+    <section id="benefits" className="relative w-full overflow-hidden bg-primary py-20 lg:py-40">
       <div className="mx-auto w-full max-w-[1920px]">
         <div className="bg-background max-w-7xl mx-auto">
           <div className="flex flex-col items-center gap-6 border-b border-border px-6 py-12 sm:px-10 sm:py-14 lg:px-16 lg:py-16">
@@ -101,7 +107,7 @@ const Benefits = () => {
                   />
                 </div>
                 <div className="flex max-w-xs flex-col gap-2">
-                  <h3 className="font-heading text-xl text-foreground">
+                  <h3 className="font-heading text-lg font-medium text-foreground">
                     {benefit.title}
                   </h3>
                   <p className="text-sm leading-relaxed text-muted-foreground sm:text-base">

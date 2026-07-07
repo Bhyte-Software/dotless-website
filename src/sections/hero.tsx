@@ -1,6 +1,9 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
 
+import { useScrollTo } from "@/hooks/use-scroll-to";
 import { cn } from "@/lib/utils";
 
 const HERO_IMAGE = "/assets/hero.png";
@@ -24,21 +27,21 @@ const INFO_BLOCKS = [
 ] as const;
 
 function HeroButton({
-    href,
     label,
     variant,
     className,
 }: {
-    href: string;
     label: string;
     variant: "primary" | "secondary";
     className?: string;
 }) {
     const isPrimary = variant === "primary";
+    const handleClick = useScrollTo("contact-us");
 
     return (
         <Link
-            href={href}
+            href="#contact-us"
+            onClick={handleClick}
             className={cn(
                 "group/button relative flex min-h-16 flex-1 items-center justify-center overflow-hidden text-sm font-medium",
                 isPrimary ? "bg-primary" : "bg-secondary",
@@ -138,8 +141,8 @@ const Hero = () => {
                         </div>
 
                         <div className="grid grid-cols-1 border-t border-border sm:grid-cols-2 h-32">
-                            <HeroButton href="/contact" label="Get a Quote" variant="primary" className="h-32 font-serif font-medium text-xl" />
-                            <HeroButton href="/services" label="Learn More" variant="secondary" className="h-32 font-serif font-medium text-xl" />
+                            <HeroButton label="Get a Quote" variant="primary" className="h-32 font-serif font-medium text-xl" />
+                            <HeroButton label="Learn More" variant="secondary" className="h-32 font-serif font-medium text-xl" />
                         </div>
                     </div>
                 </div>

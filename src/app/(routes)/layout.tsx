@@ -4,6 +4,7 @@ import Navigation from "@/sections/navigation";
 import type { Metadata } from "next";
 import { Roboto, Roboto_Serif } from "next/font/google";
 import "../globals.css";
+import { LenisProvider } from "@/components/ui/lenis-provider";
 
 const roboto = Roboto({
   variable: "--font-sans",
@@ -33,11 +34,11 @@ export default function RootLayout({
       className={cn("h-full", "antialiased", roboto.variable, robotoSerif.variable, "font-sans")}
     >
       <body className="flex flex-col">
-        <Navigation />
-        <main>
-          {children}
-        </main>
-        <Footer />
+        <LenisProvider>
+          <Navigation />
+          <main>{children}</main>
+          <Footer />
+        </LenisProvider>
       </body>
     </html>
   );
