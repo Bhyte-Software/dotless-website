@@ -106,7 +106,7 @@ const Contact = () => {
         <div className="grid md:min-h-screen grid-cols-1 lg:grid-cols-2">
           <div className="relative hidden min-h-full lg:block">
             <Image
-              src="/assets/hero.jpg"
+              src="/assets/hero.webp"
               alt="Student studying with focus and determination"
               fill
               sizes="50vw"

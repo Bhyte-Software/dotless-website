@@ -11,7 +11,7 @@ const TEAM_MEMBERS = [
   {
     name: "Professor Kwasi Opoku-Amankwa",
     role: "Lead Consultant And Founding Head",
-    image: "/assets/team-1.png",
+    image: "/assets/team-1.webp",
     imageAlt: "Professor Kwasi Opoku-Amankwa",
     highlights: [
       { value: "35", label: "Years of expertise" },
@@ -24,7 +24,7 @@ const TEAM_MEMBERS = [
   {
     name: "Professor Kafui Etsey",
     role: "Emeritus Professor (Educational Assessment And Research)",
-    image: "/assets/team-2.png",
+    image: "/assets/team-2.webp",
     imageAlt: "Professor Kafui Etsey",
     highlights: [
       { value: "40+", label: "Years of experience" },
@@ -37,7 +37,7 @@ const TEAM_MEMBERS = [
   {
     name: "Professor Eric Nyarko-Sampson",
     role: "Expert Consultant (Guidance And Counselling)",
-    image: "/assets/team-1.png",
+    image: "/assets/team-1.webp",
     imageAlt: "Professor Eric Nyarko-Sampson",
     highlights: [
       { value: "UCC", label: "Professor of Guidance" },
@@ -51,7 +51,7 @@ const TEAM_MEMBERS = [
   {
     name: "Mrs. Aba Brew-Hammond",
     role: "Senior Consultant (Language, Publishing And Materials Development)",
-    image: "/assets/team-1.png",
+    image: "/assets/team-1.webp",
     imageAlt: "Mrs. Aba Brew-Hammond",
     highlights: [
       { value: "40+", label: "Years of teaching" },

@@ -49,7 +49,7 @@ const SERVICES = [
       },
     ] satisfies ServiceItem[],
     buttonLabel: "Explore Assessment Solutions",
-    image: "/assets/measurement.jpg",
+    image: "/assets/measurement.webp",
     imageAlt: "Education measurement and assessment planning",
   },
   {
@@ -63,7 +63,7 @@ const SERVICES = [
       "Formulation of tailored School Improvement Plans (SIPs) and rigorous School Performance Reviews.",
     ] satisfies ServiceItem[],
     buttonLabel: "Explore Leadership Services",
-    image: "/assets/management.png",
+    image: "/assets/management.webp",
     imageAlt: "Educational leadership and school management consultation",
   },
   {
@@ -99,7 +99,7 @@ const SERVICES = [
       },
     ] satisfies ServiceItem[],
     buttonLabel: "Explore Student Services",
-    image: "/assets/guidance.png",
+    image: "/assets/guidance.webp",
     imageAlt: "Students receiving career guidance and test preparation support",
   },
   {
@@ -114,7 +114,7 @@ const SERVICES = [
       "Compiling specialized Educational Leadership Guides for Directors, Managers, and School Heads.",
     ] satisfies ServiceItem[],
     buttonLabel: "Explore TLMs Services",
-    image: "/assets/material.png",
+    image: "/assets/material.webp",
     imageAlt: "Teaching and learning materials development in a classroom setting",
   },
   {
@@ -129,7 +129,7 @@ const SERVICES = [
       "Media interview strategies for CEOs and business executive and team management frameworks.",
     ] satisfies ServiceItem[],
     buttonLabel: "Explore Corporate Training",
-    image: "/assets/corporate.png",
+    image: "/assets/corporate.webp",
     imageAlt: "Corporate training and professional development workshop",
   },
   {
@@ -144,7 +144,7 @@ const SERVICES = [
       "Provide localized education data and advanced statistical analyses for national educational planning.",
     ] satisfies ServiceItem[],
     buttonLabel: "Explore Policy Advisory",
-    image: "/assets/advisory.png",
+    image: "/assets/advisory.webp",
     imageAlt: "Government and NGO education policy advisory session",
   },
 ] as const;

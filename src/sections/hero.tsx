@@ -6,7 +6,7 @@ import Link from "next/link";
 import { useScrollTo } from "@/hooks/use-scroll-to";
 import { cn } from "@/lib/utils";
 
-const HERO_IMAGE = "/assets/hero.jpg";
+const HERO_IMAGE = "/assets/hero.webp";
 
 const INFO_BLOCKS = [
     {
