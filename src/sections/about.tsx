@@ -3,77 +3,78 @@
 import Link from "next/link";
 
 import { useScrollTo } from "@/hooks/use-scroll-to";
-import { cn } from "@/lib/utils";
+
+const STAKEHOLDERS = [
+  "Students and student groups",
+  "Educational institutions, school heads, and governing boards",
+  "Teachers and academic staff",
+  "Parents and educational authorities",
+  "Government agencies, NGOs, and media personnel",
+] as const;
 
 const CORE_VALUES = [
-  {
-    title: "Excellence",
-    description:
-      "We hold ourselves to the highest standards in every engagement we undertake.",
-  },
-  {
-    title: "Integrity",
-    description:
-      "Honest counsel and transparent recommendations our clients can trust.",
-  },
-  {
-    title: "Partnership",
-    description:
-      "We work alongside clients as committed collaborators, not distant advisors.",
-  },
-  {
-    title: "Impact",
-    description:
-      "We focus on outcomes that create real, lasting change for learners and institutions.",
-  },
+  "Professionalism",
+  "Integrity",
+  "Teamwork",
+  "Credibility",
+  "Hard work",
 ] as const;
 
 const ROWS = [
   {
-    label: "Mission",
+    label: "About Us",
     tone: "warm",
     content: (
-      <p className="max-w-3xl text-base leading-relaxed text-muted-foreground sm:text-lg">
-        To empower students, families, schools, and institutions with expert
-        guidance that turns educational ambition into meaningful, measurable
-        outcomes — through every stage of the learning journey.
-      </p>
+      <div className="flex flex-col gap-4 md:gap-5">
+        <p className="max-w-3xl text-sm md:text-base text-muted-foreground">
+          Dotles Education Services is a premier, multi-disciplinary educational
+          consultancy dedicated to driving excellence across the entire
+          educational ecosystem. We offer expert advisory, strategic management,
+          and technical solutions to an expansive network of stakeholders,
+          including:
+        </p>
+        <ul className="list-disc space-y-2 pl-5 text-sm md:text-base text-muted-foreground">
+          {STAKEHOLDERS.map((stakeholder) => (
+            <li key={stakeholder}>{stakeholder}</li>
+          ))}
+        </ul>
+      </div>
     ),
   },
   {
-    label: "Vision",
+    label: "Vision & Mission",
     tone: "muted",
     content: (
-      <p className="max-w-3xl text-base leading-relaxed text-muted-foreground sm:text-lg">
-        To be the most trusted educational consultancy, recognized for integrity,
-        depth of expertise, and lasting impact across academics, careers, and
-        institutional growth worldwide.
-      </p>
+      <div className="flex flex-col gap-4 md:gap-5">
+        <p className="max-w-3xl text-sm md:text-base text-muted-foreground">
+          <span className="font-medium text-foreground">Vision:</span> To be the
+          first choice in educational consulting, empowering clients to "get it
+          right".
+        </p>
+        <p className="max-w-3xl text-sm md:text-base text-muted-foreground">
+          <span className="font-medium text-foreground">Mission:</span> To offer
+          high-quality educational services and maximize outcomes through
+          top-notch, evidence-based solutions.
+        </p>
+      </div>
     ),
   },
   {
-    label: "Values",
+    label: "Core Values",
     tone: "warm",
     content: (
-      <div className="flex flex-col gap-8">
-        <p className="max-w-3xl text-base leading-relaxed text-muted-foreground sm:text-lg">
-          Our work is grounded in principles that shape how we advise,
-          collaborate, and deliver results for every student, school, and
-          organization we serve.
+      <div className="flex flex-col gap-4 md:gap-5">
+        <p className="max-w-3xl text-sm md:text-base text-muted-foreground">
+          Our operations are anchored on five fundamental pillars:
         </p>
-        <div className="grid gap-6 sm:grid-cols-2">
+        <div className="flex flex-wrap gap-3">
           {CORE_VALUES.map((value) => (
-            <div
-              key={value.title}
-              className="flex flex-col gap-2 border-l border-primary pl-5"
+            <span
+              key={value}
+              className="inline-flex items-center border border-border px-3 py-1.5 text-sm text-foreground sm:text-base"
             >
-              <p className="font-heading text-base font-medium text-foreground sm:text-lg">
-                {value.title}
-              </p>
-              <p className="text-sm leading-relaxed text-muted-foreground sm:text-base">
-                {value.description}
-              </p>
-            </div>
+              {value}
+            </span>
           ))}
         </div>
       </div>
@@ -88,7 +89,7 @@ function ContactButton() {
     <Link
       href="#contact-us"
       onClick={handleClick}
-      className="group/button relative flex min-h-24 w-full items-center justify-center overflow-hidden bg-secondary text-base font-medium"
+      className="group/button relative flex min-h-16 md:min-h-24 w-full items-center justify-center overflow-hidden bg-secondary text-base font-medium"
     >
       <span className="relative z-10 h-5 overflow-hidden font-heading text-secondary-foreground transition-colors duration-300 ease-out group-hover/button:text-primary-foreground">
         <span className="flex flex-col transition-transform duration-300 ease-out group-hover/button:-translate-y-1/2">
@@ -106,33 +107,31 @@ function ContactButton() {
 
 const About = () => {
   return (
-    <section id="about-us" className="relative w-full overflow-hidden bg-primary py-20 lg:py-40">
-      <div className="mx-auto w-full max-w-[1920px]">
+    <section id="about-us" className="relative w-full overflow-hidden bg-primary pt-0 pb-6 lg:pt-40 lg:pb-40">
+      <div className="mx-auto w-full max-w-[1920px] px-4 md:px-0">
         <div className="mx-auto max-w-7xl bg-background">
           <div className="flex flex-col items-center gap-6 border-b border-border px-6 py-12 sm:px-10 sm:py-14 lg:px-16 lg:py-16">
-            <div className="inline-flex items-center gap-2.5 border border-border px-4 py-2">
+            <div className="inline-flex items-center gap-2.5 border border-border px-2 md:px-4 py-1 md:py-2">
               <span className="size-2 shrink-0 bg-primary" aria-hidden />
               <span className="text-sm text-foreground">About DOTLES</span>
             </div>
-            <h2 className="max-w-2xl text-center font-heading text-4xl tracking-tight text-foreground">
-              The Principles That Guide Every Partnership We Build
+            <h2 className="max-w-2xl text-center font-heading text-2xl md:text-4xl tracking-tight text-foreground text-balance md:text-wrap">
+              About Dotles Education Services
             </h2>
           </div>
 
-          <div className="flex flex-col w-[80%] mx-auto">
+          <div className="mx-auto flex md:w-[80%] flex-col">
             {ROWS.map((row) => (
               <div
                 key={row.label}
-                className={cn(
-                  "grid grid-cols-1 border-b border-border lg:grid-cols-[minmax(0,1fr)_minmax(0,3fr)]",
-                )}
+                className="grid grid-cols-1 gap-2 border-b border-border lg:grid-cols-[minmax(0,1fr)_minmax(0,3fr)]"
               >
-                <div className="flex items-start border-border px-8 py-10 lg:px-12 lg:py-14">
-                  <p className="font-heading text-2xl tracking-tight text-foreground/25">
+                <div className="flex items-start border-border px-4 pt-6 pb-0 lg:px-12 lg:pt-14 lg:pb-14">
+                  <p className="font-heading text-lg md:text-2xl tracking-tight text-foreground md:text-foreground/25 text-nowrap">
                     {row.label}
                   </p>
                 </div>
-                <div className="px-8 py-10 lg:px-12 lg:py-14">{row.content}</div>
+                <div className="px-4 py-0 lg:px-12 lg:py-14 mb-4 md:mb-0 text-sm md:text-base">{row.content}</div>
               </div>
             ))}
           </div>

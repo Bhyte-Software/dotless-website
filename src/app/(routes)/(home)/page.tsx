@@ -4,6 +4,7 @@ import Contact from "@/sections/contact";
 import Hero from "@/sections/hero";
 import Impact from "@/sections/impact";
 import Services from "@/sections/services";
+import Team from "@/sections/team";
 import Testimonial from "@/sections/testimonial";
 
 const HomePage = () => {
@@ -14,6 +15,7 @@ const HomePage = () => {
       <Benefits />
       <Impact />
       <About />
+      <Team />
       <Testimonial />
       <Contact />
     </div>

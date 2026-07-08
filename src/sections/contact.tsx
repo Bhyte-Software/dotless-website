@@ -103,24 +103,24 @@ const Contact = () => {
   return (
     <section id="contact-us" className="relative w-full overflow-hidden">
       <div className="mx-auto w-full max-w-[1920px]">
-        <div className="grid min-h-screen grid-cols-1 border-x border-border lg:grid-cols-2">
-          <div className="relative min-h-72 lg:min-h-full">
+        <div className="grid md:min-h-screen grid-cols-1 lg:grid-cols-2">
+          <div className="relative hidden min-h-full lg:block">
             <Image
-              src="/assets/contact.jpg"
+              src="/assets/hero.jpg"
               alt="Student studying with focus and determination"
               fill
-              sizes="(max-width: 1024px) 100vw, 50vw"
+              sizes="50vw"
               className="object-cover object-center"
             />
           </div>
 
-          <div className="flex items-center justify-center bg-secondary/10 px-6 py-12 sm:px-10 lg:px-12 lg:py-16">
-            <div className="w-full max-w-lg border border-border bg-background p-8 sm:p-10">
-              <div className="mb-8 flex flex-col gap-2">
-                <h2 className="font-heading text-3xl tracking-tight text-foreground">
+          <div className="flex items-center justify-center bg-secondary/10 px-4 py-4 sm:px-10 lg:px-12 lg:py-16">
+            <div className="w-full max-w-lg border border-border bg-background p-6 sm:p-10">
+              <div className="mb-8 flex flex-col gap-1 md:gap-2">
+                <h2 className="font-heading text-2xl md:text-3xl tracking-tight text-foreground">
                   Send Us a Message
                 </h2>
-                <p className="text-sm leading-relaxed text-muted-foreground sm:text-base">
+                <p className="text-sm leading-relaxed text-muted-foreground md:text-base">
                   Ready to start your educational journey? Reach out and our team
                   will get back to you shortly.
                 </p>

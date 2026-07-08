@@ -6,23 +6,23 @@ import Link from "next/link";
 import { useScrollTo } from "@/hooks/use-scroll-to";
 import { cn } from "@/lib/utils";
 
-const HERO_IMAGE = "/assets/hero.png";
+const HERO_IMAGE = "/assets/hero.jpg";
 
 const INFO_BLOCKS = [
     {
-        title: "Expert Educational Guidance",
+        title: "Advisory Support",
         description:
-            "Academic and career guidance for students, parents, and professionals.",
+            "Clear educational guidance for students, families, and institutions.",
     },
     {
-        title: "Academic Excellence",
+        title: "Evidence-Based Practice",
         description:
-            "Personalized support tailored to each learner's goals and aspirations.",
+            "Practical strategies informed by data, assessment, and field experience.",
     },
     {
-        title: "Transformative School Support",
+        title: "Whole-School Improvement",
         description:
-            "Programs that strengthen pedagogy, management, and student outcomes.",
+            "Support for leadership, teaching quality, and measurable student outcomes.",
     },
 ] as const;
 
@@ -77,7 +77,7 @@ const Hero = () => {
         <section className="relative w-full overflow-hidden">
             <div className="mx-auto w-full max-w-[1920px]">
                 <div className="grid w-full grid-cols-1 lg:grid-cols-10">
-                    <div className="flex min-h-[min(100vh,760px)] flex-col lg:col-span-4 lg:min-h-[760px] lg:h-screen">
+                    <div className="order-2 flex md:min-h-[min(100vh,760px)] flex-col h-[68svh] lg:order-1 lg:col-span-4 lg:min-h-[760px] lg:h-screen">
                         <div className="relative min-h-0 flex-1 overflow-hidden">
                             <Image
                                 src={HERO_IMAGE}
@@ -90,48 +90,47 @@ const Hero = () => {
                             />
                         </div>
 
-                        <div className="flex h-32 flex-col justify-between border-b bg-background px-8 py-4 border-l-8 border-l-primary">
-                            <p className="text-left text-base text-muted-foreground text-balance">
+                        <div className="flex md:h-32 flex-col gap-2 md:gap-0 md:justify-between border-b bg-background px-8 py-4 border-l-8 border-l-primary">
+                            <p className="text-left text-sm md:text-base text-muted-foreground text-balance">
                                 &ldquo;Guiding students towards their academic and career
                                 success with clarity, care, and expertise you can trust.&rdquo;
                             </p>
                             <div className="flex flex-col gap-4">
-                                <p className="font-heading text-base font-medium text-foreground">
+                                <p className="font-heading text-sm md:text-base font-medium text-foreground">
                                     DOTLES Advisory Team
                                 </p>
                             </div>
                         </div>
                     </div>
 
-                    <div className="flex min-h-[min(100vh,760px)] flex-col lg:col-span-6 lg:min-h-[760px] lg:h-screen">
+                    <div className="order-1 flex flex-col md:min-h-[min(100vh,760px)] lg:order-2 lg:col-span-6 lg:min-h-[760px] lg:h-screen">
                         <div className="flex flex-1 flex-col">
-                            <div className="flex flex-1 flex-col justify-between gap-10 px-6 py-10 sm:px-10 sm:py-12 lg:px-12 lg:py-16">
-                                <div className="flex max-w-3xl flex-col gap-4 pt-10">
+                            <div className="flex flex-1 flex-col justify-between gap-10 px-4 py-10 md:px-10 md:py-12 lg:px-12 lg:py-16">
+                                <div className="flex max-w-3xl flex-col gap-1.5 md:gap-4 pt-10">
                                     <h1
                                         id="hero-heading"
-                                        className="font-heading text-4xl font-regular tracking-tight text-foreground sm:text-5xl lg:text-6xl"
+                                        className="font-heading text-3xl font-regular tracking-tight text-foreground md:text-5xl lg:text-6xl mt-12 md:mt-0"
                                     >
-                                        Turn Educational Ambition Into{" "}
-                                        <span className="text-primary">Lasting Achievement</span>
+                                        Practical Educational Support for{" "}
+                                        <span className="text-primary">Better Outcomes</span>
                                     </h1>
-                                    <p className="max-w-xl text-base text-muted-foreground">
-                                        From university pathways to whole-school improvement, DOTLES
-                                        brings over 35 years of practice-tested insight to students,
-                                        families, and institutions ready to move forward with
-                                        confidence.
+                                    <p className="max-w-xl text-sm md:text-base text-muted-foreground text-balance md:text-wrap">
+                                        From student counselling to institutional advisory services,
+                                        DOTLES delivers focused, evidence-based support that helps
+                                        clients make confident decisions and improve results.
                                     </p>
                                 </div>
 
-                                <div className="grid gap-6 sm:grid-cols-3">
+                                <div className="grid gap-4 md:gap-6 md:grid-cols-3">
                                     {INFO_BLOCKS.map((block) => (
                                         <div
                                             key={block.title}
                                             className="flex h-full flex-col gap-1 border-l border-primary pl-5"
                                         >
-                                            <p className="text-sm font-medium text-foreground sm:text-base">
+                                            <p className="text-sm font-medium text-foreground md:text-base font-heading">
                                                 {block.title}
                                             </p>
-                                            <p className="text-sm text-muted-foreground">
+                                            <p className="text-sm text-muted-foreground text-balance md:text-wrap">
                                                 {block.description}
                                             </p>
                                         </div>
@@ -140,9 +139,9 @@ const Hero = () => {
                             </div>
                         </div>
 
-                        <div className="grid grid-cols-1 border-t border-border sm:grid-cols-2 h-32">
-                            <HeroButton label="Get a Quote" variant="primary" className="h-32 font-serif font-medium text-xl" />
-                            <HeroButton label="Learn More" variant="secondary" className="h-32 font-serif font-medium text-xl" />
+                        <div className="grid grid-cols-1 border-t border-border md:grid-cols-2 md:h-32">
+                            <HeroButton label="Get a Quote" variant="primary" className="h-16 md:h-32 font-serif font-medium text-base md:text-xl" />
+                            <HeroButton label="Learn More" variant="secondary" className="h-16 md:h-32 font-serif font-medium text-base md:text-xl" />
                         </div>
                     </div>
                 </div>
