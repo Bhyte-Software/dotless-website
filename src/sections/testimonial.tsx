@@ -13,7 +13,7 @@ const Testimonial = () => {
                     <div className="mx-auto flex max-w-xl flex-col items-center gap-8 text-center">
                         <div className="relative size-28 md:size-40 shrink-0 overflow-hidden rounded-full">
                             <Image
-                                src="/assets/student.webp"
+                                src="/assets/testimonial.webp"
                                 alt="Smiling student holding notebooks"
                                 fill
                                 sizes="160px"
