@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { IconMenu2, IconX } from "@tabler/icons-react";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
@@ -39,6 +40,30 @@ const NAV_LINKS = [
   { id: "impact", label: "Impact" },
 ] as const;
 
+const LOGO_IMAGE = "/assets/DOTLES Logo.jpeg";
+
+function LogoLink({ className }: { className?: string }) {
+  return (
+    <Link
+      href="/"
+      aria-label="DOTLES home"
+      className={cn(
+        "relative block h-12 md:h-16 w-24 md:w-32 shrink-0 overflow-hidden bg-background border-r border-b",
+        className
+      )}
+    >
+      <Image
+        src={LOGO_IMAGE}
+        alt="DOTLES"
+        fill
+        priority
+        sizes="(max-width: 768px) 96px, 128px"
+        className="object-cover object-center"
+      />
+    </Link>
+  );
+}
+
 function AnimatedScrollLink({
   targetId,
   label,
@@ -60,60 +85,6 @@ function AnimatedScrollLink({
     <Link
       href={`#${targetId}`}
       onClick={handleClick}
-      className={cn(
-        "group/nav relative flex h-12 md:h-16 items-center justify-center overflow-hidden bg-background px-4 text-sm",
-        className
-      )}
-    >
-      <span
-        className={cn(
-          "relative z-10 h-5 overflow-hidden text-foreground",
-          textClassName
-        )}
-      >
-        <span className="flex flex-col transition-transform duration-300 ease-out group-hover/nav:-translate-y-1/2">
-          <span className="flex h-5 items-center justify-center whitespace-nowrap">
-            {label}
-          </span>
-          <span
-            className={cn(
-              "flex h-5 items-center justify-center whitespace-nowrap",
-              hoverTextClassName
-            )}
-          >
-            {label}
-          </span>
-        </span>
-      </span>
-      <span
-        aria-hidden
-        className={cn(
-          "absolute inset-0 translate-y-full transition-transform duration-300 ease-out group-hover/nav:translate-y-0",
-          hoverBgClassName
-        )}
-      />
-    </Link>
-  );
-}
-
-function AnimatedLink({
-  href,
-  label,
-  className,
-  textClassName,
-  hoverBgClassName,
-  hoverTextClassName,
-}: {
-  href: string;
-  label: string;
-  className?: string;
-  textClassName?: string;
-  hoverBgClassName: string;
-  hoverTextClassName?: string;
-}) {
-  return (
-    <Link
-      href={href}
       className={cn(
         "group/nav relative flex h-12 md:h-16 items-center justify-center overflow-hidden bg-background px-4 text-sm",
         className
@@ -312,13 +283,7 @@ const Navigation = () => {
           className="relative z-50 md:h-16 h-12 grid w-full grid-cols-1 lg:grid-cols-10"
         >
           <div className="col-span-4 flex w-full items-center justify-between">
-            <AnimatedLink
-              href="/"
-              label="DOTLES"
-              className="w-fit font-bold md:font-extrabold text-base md:text-lg border-r border-b"
-              hoverBgClassName="bg-primary"
-              hoverTextClassName="text-primary-foreground"
-            />
+            <LogoLink />
             <HamburgerButton
               isOpen={isMobileMenuOpen}
               onClick={toggleMobileMenu}

@@ -77,30 +77,16 @@ const Hero = () => {
         <section className="relative w-full overflow-hidden">
             <div className="mx-auto w-full max-w-[1920px]">
                 <div className="grid w-full grid-cols-1 lg:grid-cols-10">
-                    <div className="order-2 flex md:min-h-[min(100vh,760px)] flex-col h-[68svh] lg:order-1 lg:col-span-4 lg:min-h-[760px] lg:h-screen">
-                        <div className="relative min-h-0 flex-1 overflow-hidden">
-                            <Image
-                                src={HERO_IMAGE}
-                                alt="Students receiving expert educational guidance and mentorship"
-                                fill
-                                priority
-                                quality={100}
-                                sizes="(max-width: 1024px) 100vw, 40vw"
-                                className="object-cover object-center"
-                            />
-                        </div>
-
-                        <div className="flex md:h-32 flex-col gap-2 md:gap-0 md:justify-between border-b bg-background px-8 py-4 border-l-8 border-l-primary">
-                            <p className="text-left text-sm md:text-base text-muted-foreground text-balance">
-                                &ldquo;Guiding students towards their academic and career
-                                success with clarity, care, and expertise you can trust.&rdquo;
-                            </p>
-                            <div className="flex flex-col gap-4">
-                                <p className="font-heading text-sm md:text-base font-medium text-foreground">
-                                    DOTLES Advisory Team
-                                </p>
-                            </div>
-                        </div>
+                    <div className="relative order-2 h-[68svh] overflow-hidden md:min-h-[min(100vh,760px)] lg:order-1 lg:col-span-4 lg:min-h-[760px] lg:h-screen">
+                        <Image
+                            src={HERO_IMAGE}
+                            alt="Students receiving expert educational guidance and mentorship"
+                            fill
+                            priority
+                            quality={100}
+                            sizes="(max-width: 1024px) 100vw, 40vw"
+                            className="object-cover object-center"
+                        />
                     </div>
 
                     <div className="order-1 flex flex-col md:min-h-[min(100vh,760px)] lg:order-2 lg:col-span-6 lg:min-h-[760px] lg:h-screen">
