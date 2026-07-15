@@ -2,9 +2,6 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { AnimatePresence, motion, useReducedMotion } from "motion/react";
-import { useLenis } from "lenis/react";
-import { useEffect, useRef, useState } from "react";
 
 import { useScrollTo } from "@/hooks/use-scroll-to";
 
@@ -149,14 +146,45 @@ const SERVICES = [
   },
 ] as const;
 
-const VIEWPORT_HEIGHT_PER_SERVICE = 180;
-/** Extra viewport segment so the last service can dwell before the section releases. */
-const SCROLL_EXIT_SEGMENTS = 1;
+function ServiceDesktopContent({
+  service,
+}: {
+  service: (typeof SERVICES)[number];
+}) {
+  return (
+    <div className="flex flex-col gap-6">
+      <div className="inline-flex w-fit items-center gap-2.5 border border-border px-4 py-2">
+        <span className="size-2 shrink-0 bg-primary" aria-hidden />
+        <span className="text-sm text-foreground">{service.chip}</span>
+      </div>
 
-const EASE = [0.22, 1, 0.36, 1] as const;
-
-const SECTION_HEIGHT_VH =
-  (SERVICES.length + SCROLL_EXIT_SEGMENTS) * VIEWPORT_HEIGHT_PER_SERVICE;
+      <div className="flex flex-col gap-5">
+        <h2 className="max-w-xl font-heading text-3xl text-balance tracking-tight text-foreground lg:text-4xl">
+          {service.title}
+        </h2>
+        <p className="max-w-lg text-base leading-relaxed text-muted-foreground">
+          {service.description}
+        </p>
+        <ul className="max-w-lg space-y-2.5 text-sm leading-relaxed text-muted-foreground">
+          {service.items.map((item) => (
+            <li
+              key={typeof item === "string" ? item : item.title}
+              className="flex gap-2.5"
+            >
+              <span
+                className="mt-2 size-1.5 shrink-0 rounded-full bg-primary"
+                aria-hidden
+              />
+              <span>
+                <ServiceItemContent item={item} />
+              </span>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  );
+}
 
 function ServiceButton({ label }: { label: string }) {
   const handleClick = useScrollTo("contact-us");
@@ -218,68 +246,6 @@ function ServiceImage({
 }
 
 const Services = () => {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const [activeIndex, setActiveIndex] = useState(0);
-  const shouldReduceMotion = useReducedMotion();
-  const lenis = useLenis();
-
-  useEffect(() => {
-    if (window.matchMedia("(max-width: 1023px)").matches) {
-      setActiveIndex(0);
-      return;
-    }
-
-    const updateActiveIndex = () => {
-      const container = containerRef.current;
-      if (!container) return;
-
-      const { top, height } = container.getBoundingClientRect();
-      const scrollableDistance = height - window.innerHeight;
-
-      if (scrollableDistance <= 0) {
-        setActiveIndex(0);
-        return;
-      }
-
-      const scrolled = Math.min(scrollableDistance, Math.max(0, -top));
-      const exitBuffer =
-        window.innerHeight *
-        ((SCROLL_EXIT_SEGMENTS * VIEWPORT_HEIGHT_PER_SERVICE) / 100);
-      const switchDistance = Math.max(scrollableDistance - exitBuffer, 1);
-      const switchScrolled = Math.min(switchDistance, scrolled);
-      const progress = switchScrolled / switchDistance;
-      const nextIndex = Math.min(
-        SERVICES.length - 1,
-        Math.floor(progress * SERVICES.length)
-      );
-
-      setActiveIndex(nextIndex);
-    };
-
-    updateActiveIndex();
-    lenis?.resize();
-
-    if (lenis) {
-      return lenis.on("scroll", updateActiveIndex);
-    }
-
-    window.addEventListener("scroll", updateActiveIndex, { passive: true });
-    window.addEventListener("resize", updateActiveIndex);
-
-    return () => {
-      window.removeEventListener("scroll", updateActiveIndex);
-      window.removeEventListener("resize", updateActiveIndex);
-    };
-  }, [lenis]);
-
-  const activeService = SERVICES[activeIndex];
-  const contentTransition = shouldReduceMotion
-    ? { duration: 0 }
-    : { duration: 0.55, ease: EASE };
-  const imageTransition = shouldReduceMotion
-    ? { duration: 0 }
-    : { duration: 0.7, ease: EASE };
-
   return (
     <div id="services" aria-label="Our services">
       <section className="relative lg:hidden">
@@ -338,201 +304,29 @@ const Services = () => {
         </div>
       </section>
 
-      <section
-        ref={containerRef}
-        className="relative hidden lg:block"
-        style={{ height: `${SECTION_HEIGHT_VH}vh` }}
-      >
-        <div className="sticky top-[65px] h-[calc(100vh-65px)] overflow-hidden">
-          <div className="mx-auto h-full w-full max-w-[1920px]">
-            <div className="grid h-full grid-cols-1 lg:grid-cols-[1fr_1.5fr]">
-              <div className="relative flex min-h-0 flex-col bg-background lg:min-h-full">
-                <div className="relative h-48 shrink-0 overflow-hidden lg:hidden">
-                  <AnimatePresence mode="popLayout" initial={false}>
-                    <motion.div
-                      key={activeService.title}
-                      initial={
-                        shouldReduceMotion
-                          ? false
-                          : { opacity: 0, scale: 1.06 }
-                      }
-                      animate={{ opacity: 1, scale: 1 }}
-                      exit={
-                        shouldReduceMotion
-                          ? { opacity: 1 }
-                          : { opacity: 0, scale: 1.02 }
-                      }
-                      transition={imageTransition}
-                      className="absolute inset-0"
-                    >
-                      <ServiceImage
-                        service={activeService}
-                        priority={activeIndex === 0}
-                        sizes="100vw"
-                        className="object-cover object-center"
-                      />
-                    </motion.div>
-                  </AnimatePresence>
-                </div>
-
-                <div className="flex min-h-0 flex-1 flex-col justify-between pt-12">
-                  <div
-                    className="px-4 lg:px-12"
-                    aria-live="polite"
-                    aria-atomic="true"
-                  >
-                    <div className="min-h-[320px] sm:min-h-[380px] lg:min-h-[420px]">
-                      <AnimatePresence mode="wait" initial={false}>
-                        <motion.div
-                          key={activeService.title}
-                          initial={
-                            shouldReduceMotion
-                              ? false
-                              : { opacity: 0, y: 32 }
-                          }
-                          animate={{ opacity: 1, y: 0 }}
-                          exit={
-                            shouldReduceMotion
-                              ? { opacity: 1 }
-                              : { opacity: 0, y: -24 }
-                          }
-                          transition={contentTransition}
-                          className="flex flex-col gap-6"
-                        >
-                          <motion.div
-                            initial={
-                              shouldReduceMotion ? false : { opacity: 0, x: -16 }
-                            }
-                            animate={{ opacity: 1, x: 0 }}
-                            transition={{
-                              ...contentTransition,
-                              delay: shouldReduceMotion ? 0 : 0.06,
-                            }}
-                            className="inline-flex w-fit items-center gap-2.5 border border-border px-4 py-2"
-                          >
-                            <span
-                              className="size-2 shrink-0 bg-primary"
-                              aria-hidden
-                            />
-                            <span className="text-sm text-foreground">
-                              {activeService.chip}
-                            </span>
-                          </motion.div>
-
-                          <div className="flex flex-col gap-5">
-                            <motion.h2
-                              initial={
-                                shouldReduceMotion ? false : { opacity: 0, y: 20 }
-                              }
-                              animate={{ opacity: 1, y: 0 }}
-                              transition={{
-                                ...contentTransition,
-                                delay: shouldReduceMotion ? 0 : 0.1,
-                              }}
-                              className="max-w-xl font-heading text-3xl text-balance tracking-tight text-foreground lg:text-4xl"
-                            >
-                              {activeService.title}
-                            </motion.h2>
-                            <motion.p
-                              initial={
-                                shouldReduceMotion ? false : { opacity: 0, y: 20 }
-                              }
-                              animate={{ opacity: 1, y: 0 }}
-                              transition={{
-                                ...contentTransition,
-                                delay: shouldReduceMotion ? 0 : 0.16,
-                              }}
-                              className="max-w-lg text-base leading-relaxed text-muted-foreground"
-                            >
-                              {activeService.description}
-                            </motion.p>
-                            <motion.ul
-                              initial={
-                                shouldReduceMotion ? false : { opacity: 0, y: 20 }
-                              }
-                              animate={{ opacity: 1, y: 0 }}
-                              transition={{
-                                ...contentTransition,
-                                delay: shouldReduceMotion ? 0 : 0.22,
-                              }}
-                              className="max-w-lg space-y-2.5 text-sm leading-relaxed text-muted-foreground"
-                            >
-                              {activeService.items.map((item) => (
-                                <li
-                                  key={
-                                    typeof item === "string" ? item : item.title
-                                  }
-                                  className="flex gap-2.5"
-                                >
-                                  <span
-                                    className="mt-2 size-1.5 shrink-0 rounded-full bg-primary"
-                                    aria-hidden
-                                  />
-                                  <span>
-                                    <ServiceItemContent item={item} />
-                                  </span>
-                                </li>
-                              ))}
-                            </motion.ul>
-                          </div>
-                        </motion.div>
-                      </AnimatePresence>
-                    </div>
-                  </div>
-
-                  <div className="relative mt-8 h-20 md:h-32 border-t border-border lg:mt-0">
-                    <AnimatePresence mode="wait" initial={false}>
-                      <motion.div
-                        key={activeService.title}
-                        initial={
-                          shouldReduceMotion ? false : { opacity: 0, y: 20 }
-                        }
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={
-                          shouldReduceMotion
-                            ? { opacity: 1 }
-                            : { opacity: 0, y: -12 }
-                        }
-                        transition={{
-                          ...contentTransition,
-                          delay: shouldReduceMotion ? 0 : 0.08,
-                        }}
-                        className="absolute inset-0"
-                      >
-                        <ServiceButton label={activeService.buttonLabel} />
-                      </motion.div>
-                    </AnimatePresence>
-                  </div>
-                </div>
+      <section className="relative hidden lg:block">
+        <div className="mx-auto w-full max-w-[1920px] bg-background">
+          {SERVICES.map((service, index) => (
+            <article
+              key={service.title}
+              className="grid grid-cols-[1fr_1.5fr] border-b border-border"
+            >
+              <div className="min-h-[calc(100vh-65px)] px-12 pt-16 pb-48">
+                <ServiceDesktopContent service={service} />
               </div>
 
-              <div className="relative hidden overflow-hidden lg:block">
-                <AnimatePresence mode="popLayout" initial={false}>
-                  <motion.div
-                    key={activeService.title}
-                    initial={
-                      shouldReduceMotion ? false : { opacity: 0, scale: 1.05 }
-                    }
-                    animate={{ opacity: 1, scale: 1 }}
-                    exit={
-                      shouldReduceMotion
-                        ? { opacity: 1 }
-                        : { opacity: 0, scale: 1.02 }
-                    }
-                    transition={imageTransition}
-                    className="absolute inset-0"
-                  >
-                    <ServiceImage
-                      service={activeService}
-                      priority={activeIndex === 0}
-                      sizes="(max-width: 1024px) 100vw, 60vw"
-                      className="object-cover object-center"
-                    />
-                  </motion.div>
-                </AnimatePresence>
+              <div className="relative">
+                <div className="sticky top-[65px] relative h-[calc(100vh-65px)]">
+                  <ServiceImage
+                    service={service}
+                    priority={index === 0}
+                    sizes="(max-width: 1024px) 100vw, 60vw"
+                    className="object-cover object-center"
+                  />
+                </div>
               </div>
-            </div>
-          </div>
+            </article>
+          ))}
         </div>
       </section>
     </div>

@@ -1,6 +1,6 @@
 "use client";
 
-import Image from "next/image";
+import { IconUser } from "@tabler/icons-react";
 import Link from "next/link";
 import { useEffect, useRef } from "react";
 
@@ -11,8 +11,6 @@ const TEAM_MEMBERS = [
   {
     name: "Professor Kwasi Opoku-Amankwa",
     role: "Lead Consultant And Founding Head",
-    image: "/assets/team-1.webp",
-    imageAlt: "Professor Kwasi Opoku-Amankwa",
     highlights: [
       { value: "35", label: "Years of expertise" },
       { value: "GES", label: "Former Director-General" },
@@ -23,22 +21,18 @@ const TEAM_MEMBERS = [
   },
   {
     name: "Professor Kafui Etsey",
-    role: "Emeritus Professor (Educational Assessment And Research)",
-    image: "/assets/team-2.webp",
-    imageAlt: "Professor Kafui Etsey",
+    role: "Professor (Educational Assessment And Research)",
     highlights: [
       { value: "40+", label: "Years of experience" },
-      { value: "UCC", label: "Emeritus Professor" },
+      { value: "UCC", label: "Professor" },
       { value: "Assessment", label: "Core specialization" },
       { value: "Research", label: "Quantitative methods" },
     ],
-    bio: "Emeritus Professor at the University of Cape Coast, combining early career classroom teaching with decades of university lecturing as a leading authority in assessment, statistics, measurement, and evaluation.",
+    bio: "Professor at the University of Cape Coast, combining early career classroom teaching with decades of university lecturing as a leading authority in assessment, statistics, measurement, and evaluation.",
   },
   {
     name: "Professor Eric Nyarko-Sampson",
     role: "Expert Consultant (Guidance And Counselling)",
-    image: "/assets/team-1.webp",
-    imageAlt: "Professor Eric Nyarko-Sampson",
     highlights: [
       { value: "UCC", label: "Professor of Guidance" },
       { value: "UESD", label: "Foundation Vice-Chancellor" },
@@ -51,8 +45,6 @@ const TEAM_MEMBERS = [
   {
     name: "Mrs. Aba Brew-Hammond",
     role: "Senior Consultant (Language, Publishing And Materials Development)",
-    image: "/assets/team-1.webp",
-    imageAlt: "Mrs. Aba Brew-Hammond",
     highlights: [
       { value: "40+", label: "Years of teaching" },
       { value: "KNUST", label: "Senior Lecturer" },
@@ -126,14 +118,18 @@ function TeamMemberCard({
   );
 
   const imagePanel = (
-    <div className="relative h-120 w-full shrink-0 lg:h-full lg:w-[50%]">
-      <Image
-        src={member.image}
-        alt={member.imageAlt}
-        fill
-        sizes="(max-width: 1024px) 100vw, 30vw"
-        className="object-cover object-center"
-      />
+    <div
+      className="relative flex h-120 w-full shrink-0 items-center justify-center bg-muted lg:h-full lg:w-[50%]"
+      aria-label={`${member.name} profile photo`}
+      role="img"
+    >
+      <div className="flex size-32 items-center justify-center rounded-full bg-background md:size-40 lg:size-48">
+        <IconUser
+          className="size-16 text-muted-foreground/35 md:size-20 lg:size-24"
+          stroke={1.25}
+          aria-hidden
+        />
+      </div>
     </div>
   );
 

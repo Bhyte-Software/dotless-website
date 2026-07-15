@@ -177,58 +177,26 @@ function GetQuoteButton() {
   );
 }
 
-function FooterLogo({ className }: { className?: string }) {
-  return (
-    <Link
-      href="/"
-      className={cn(
-        "group/logo flex min-h-64 flex-col items-center justify-center gap-3 bg-primary p-10",
-        "lg:min-h-full",
-        className
-      )}
-    >
-      <span className="relative h-12 md:h-36 overflow-hidden font-heading text-6xl md:text-9xl font-regular text-primary">
-        <span className="flex flex-col transition-transform duration-300 ease-out group-hover/logo:-translate-y-1/2">
-          <span className="flex h-12 items-center justify-center text-primary-foreground md:h-36">
-            DE
-          </span>
-          <span className="flex h-12 items-center justify-center text-primary-foreground md:h-36">
-            DE
-          </span>
-        </span>
-      </span>
-      <h3 className="font-heading text-base font-medium text-primary-foreground md:text-xl">
-        DOTLES Education
-      </h3>
-    </Link>
-  );
-}
-
 const Footer = () => {
   return (
     <footer className="w-full">
       <div className="mx-auto w-full max-w-[1920px]">
         <div className="bg-background">
-          <div className="grid grid-cols-1 lg:grid-cols-2">
-            <div className="flex flex-col">
-              <FooterLogo className="lg:hidden" />
-              <div className="grid flex-1 grid-cols-2 gap-px bg-border md:grid-cols-2">
-                <FooterBlock title="Menu" links={MENU_LINKS} />
-                <FooterBlock title="Follow Us" links={SOCIAL_LINKS.map((l) => ({ ...l, external: true }))} />
-                <FooterBlock title="Discover" links={DISCOVER_LINKS} className="col-span-2 md:col-span-1" />
-                <FooterBlock title="Get In Touch" links={CONTACT_LINKS} className="col-span-2 md:col-span-1" />
-              </div>
+          <div className="flex flex-col">
+            <GetQuoteButton />
 
-              <GetQuoteButton />
-
-              <div className="flex min-h-16 items-center justify-center bg-[#1C1D5F] px-6 py-4">
-                <p className="text-center font-heading text-sm text-secondary">
-                  © {new Date().getFullYear()}, DOTLES Education
-                </p>
-              </div>
+            <div className="grid flex-1 grid-cols-2 gap-px bg-border md:grid-cols-2">
+              <FooterBlock title="Menu" links={MENU_LINKS} />
+              <FooterBlock title="Follow Us" links={SOCIAL_LINKS.map((l) => ({ ...l, external: true }))} />
+              <FooterBlock title="Discover" links={DISCOVER_LINKS} className="col-span-2 md:col-span-1" />
+              <FooterBlock title="Get In Touch" links={CONTACT_LINKS} className="col-span-2 md:col-span-1" />
             </div>
 
-            <FooterLogo className="hidden lg:flex" />
+            <div className="flex min-h-16 items-center justify-center bg-[#1C1D5F] px-6 py-4">
+              <p className="text-center font-heading text-sm text-secondary">
+                © {new Date().getFullYear()}, DOTLES Education
+              </p>
+            </div>
           </div>
         </div>
       </div>

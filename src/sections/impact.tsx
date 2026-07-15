@@ -81,11 +81,13 @@ function ImpactImage({
   priority,
   sizes,
   className,
+  objectPosition = "center center",
 }: {
   impact: (typeof IMPACTS)[number];
   priority?: boolean;
   sizes: string;
   className?: string;
+  objectPosition?: string;
 }) {
   return (
     <Image
@@ -95,18 +97,21 @@ function ImpactImage({
       priority={priority}
       sizes={sizes}
       className={className}
+      style={{ objectPosition }}
     />
   );
 }
 
 const Impact = () => {
   const containerRef = useRef<HTMLDivElement>(null);
+  const activeIndexRef = useRef(0);
   const [activeIndex, setActiveIndex] = useState(0);
   const shouldReduceMotion = useReducedMotion();
   const lenis = useLenis();
 
   useEffect(() => {
     if (window.matchMedia("(max-width: 1023px)").matches) {
+      activeIndexRef.current = 0;
       setActiveIndex(0);
       return;
     }
@@ -119,6 +124,7 @@ const Impact = () => {
       const scrollableDistance = height - window.innerHeight;
 
       if (scrollableDistance <= 0) {
+        activeIndexRef.current = 0;
         setActiveIndex(0);
         return;
       }
@@ -135,7 +141,10 @@ const Impact = () => {
         Math.floor(progress * IMPACTS.length)
       );
 
-      setActiveIndex(nextIndex);
+      if (nextIndex !== activeIndexRef.current) {
+        activeIndexRef.current = nextIndex;
+        setActiveIndex(nextIndex);
+      }
     };
 
     updateActiveIndex();
@@ -174,26 +183,30 @@ const Impact = () => {
               key={impact.metricLabel}
               className="border-b border-border last:border-b-0"
             >
-              <div className="flex flex-col bg-background" aria-live="polite" aria-atomic="true">
+              <div
+                className="flex flex-col bg-background"
+                aria-live="polite"
+                aria-atomic="true"
+              >
                 <div className="px-4 pb-6 pt-8 text-center md:px-10">
-                  <div className="flex flex-col items-start md:items-center gap-2 md:gap-6">
-                    <div className="inline-flex items-center gap-2.5 border border-border px-2 md:px-4 py-1 md:py-2">
+                  <div className="flex flex-col items-start gap-2 md:items-center md:gap-6">
+                    <div className="inline-flex items-center gap-2.5 border border-border px-2 py-1 md:px-4 md:py-2">
                       <span className="size-2 shrink-0 bg-primary" aria-hidden />
                       <span className="text-sm text-foreground">{impact.chip}</span>
                     </div>
 
-                    <h2 className="max-w-xl font-heading text-2xl md:text-3xl tracking-tight text-foreground text-left md:text-center">
+                    <h2 className="max-w-xl text-left font-heading text-2xl tracking-tight text-foreground md:text-center md:text-3xl">
                       {impact.title}
                     </h2>
                   </div>
                 </div>
 
-                <div className="relative h-80 overflow-hidden">
+                <div className="relative h-96 overflow-hidden bg-muted/20">
                   <ImpactImage
                     impact={impact}
                     priority={index === 0}
                     sizes="100vw"
-                    className="object-cover object-center"
+                    className="object-contain object-center"
                   />
                 </div>
 
@@ -204,10 +217,10 @@ const Impact = () => {
                         key={highlight.title}
                         className="flex flex-col gap-0 border-l border-primary pl-4 text-left"
                       >
-                        <p className="font-heading font-medium text-base text-foreground">
+                        <p className="font-heading text-base font-medium text-foreground">
                           {highlight.title}
                         </p>
-                        <p className="text-sm leading-relaxed text-muted-foreground text-balance">
+                        <p className="text-sm leading-relaxed text-balance text-muted-foreground">
                           {highlight.description}
                         </p>
                       </div>
@@ -220,9 +233,7 @@ const Impact = () => {
                 <p className="font-heading text-5xl tracking-tight">
                   {impact.metric}
                 </p>
-                <p className="font-heading text-base">
-                  {impact.metricLabel}
-                </p>
+                <p className="font-heading text-base">{impact.metricLabel}</p>
               </div>
             </article>
           ))}
@@ -236,8 +247,12 @@ const Impact = () => {
       >
         <div className="sticky top-[65px] h-[calc(100vh-65px)] overflow-hidden">
           <div className="mx-auto h-full w-full max-w-[1920px]">
-            <div className="grid h-full grid-cols-1 lg:grid-cols-[1.2fr_1fr]">
-              <div className="relative flex min-h-0 items-center justify-center bg-primary px-8 py-12 text-center text-primary-foreground lg:min-h-full">
+            <div className="grid h-full grid-cols-[1.15fr_1fr]">
+              <div
+                className="relative flex min-h-0 flex-col bg-primary px-8 py-10 text-primary-foreground"
+                aria-live="polite"
+                aria-atomic="true"
+              >
                 <AnimatePresence mode="wait" initial={false}>
                   <motion.div
                     key={activeImpact.metricLabel}
@@ -251,152 +266,93 @@ const Impact = () => {
                         : { opacity: 0, y: -32, scale: 0.98 }
                     }
                     transition={metricTransition}
-                    className="flex flex-col items-center gap-3"
+                    className="flex flex-col items-start gap-3"
                   >
-                    <p className="font-heading text-6xl tracking-tight sm:text-7xl lg:text-9xl">
+                    <p className="font-heading text-6xl tracking-tight sm:text-7xl lg:text-8xl">
                       {activeImpact.metric}
                     </p>
-                    <p className="font-heading text-xl sm:text-2xl lg:text-3xl">
+                    <p className="font-heading text-xl sm:text-2xl">
                       {activeImpact.metricLabel}
                     </p>
                   </motion.div>
                 </AnimatePresence>
-              </div>
 
-              <div className="relative flex min-h-0 flex-col bg-background lg:min-h-full">
-                <div className="relative h-48 shrink-0 overflow-hidden lg:hidden">
-                  <AnimatePresence mode="popLayout" initial={false}>
+                <div className="mt-10 flex flex-1 flex-col gap-8">
+                  <AnimatePresence mode="wait" initial={false}>
                     <motion.div
                       key={activeImpact.metricLabel}
-                      initial={
-                        shouldReduceMotion ? false : { opacity: 0, scale: 1.06 }
-                      }
-                      animate={{ opacity: 1, scale: 1 }}
+                      initial={shouldReduceMotion ? false : { opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
                       exit={
-                        shouldReduceMotion
-                          ? { opacity: 1 }
-                          : { opacity: 0, scale: 1.02 }
+                        shouldReduceMotion ? { opacity: 1 } : { opacity: 0, y: -16 }
                       }
-                      transition={imageTransition}
-                      className="absolute inset-0"
+                      transition={contentTransition}
+                      className="flex flex-col items-start gap-5"
                     >
-                      <ImpactImage
-                        impact={activeImpact}
-                        priority={activeIndex === 0}
-                        sizes="100vw"
-                        className="object-cover object-center"
-                      />
+                      <div className="inline-flex items-center gap-2.5 border border-primary-foreground/25 px-4 py-2">
+                        <span
+                          className="size-2 shrink-0 bg-primary-foreground"
+                          aria-hidden
+                        />
+                        <span className="text-sm">{activeImpact.chip}</span>
+                      </div>
+                      <h2 className="max-w-xl font-heading text-3xl tracking-tight lg:text-4xl">
+                        {activeImpact.title}
+                      </h2>
+                    </motion.div>
+                  </AnimatePresence>
+
+                  <AnimatePresence mode="wait" initial={false}>
+                    <motion.div
+                      key={activeImpact.metricLabel}
+                      initial={shouldReduceMotion ? false : { opacity: 0, y: 16 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={
+                        shouldReduceMotion ? { opacity: 1 } : { opacity: 0, y: -12 }
+                      }
+                      transition={{
+                        ...contentTransition,
+                        delay: shouldReduceMotion ? 0 : 0.08,
+                      }}
+                      className="mt-auto grid gap-5 border-t border-primary-foreground/20 pt-6 sm:grid-cols-2"
+                    >
+                      {activeImpact.highlights.map((highlight) => (
+                        <div
+                          key={highlight.title}
+                          className="flex flex-col gap-1 border-l border-primary-foreground/40 pl-4 text-left"
+                        >
+                          <p className="font-heading text-base sm:text-lg">
+                            {highlight.title}
+                          </p>
+                          <p className="text-sm leading-relaxed text-primary-foreground/80">
+                            {highlight.description}
+                          </p>
+                        </div>
+                      ))}
                     </motion.div>
                   </AnimatePresence>
                 </div>
+              </div>
 
-                <div
-                  className="flex min-h-0 flex-1 flex-col"
-                  aria-live="polite"
-                  aria-atomic="true"
-                >
-                  <div className="shrink-0 px-6 pb-4 pt-8 text-center md:px-10 lg:px-8 lg:pb-6 lg:pt-12">
-                    <AnimatePresence mode="wait" initial={false}>
-                      <motion.div
-                        key={activeImpact.metricLabel}
-                        initial={shouldReduceMotion ? false : { opacity: 0, y: 28 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={
-                          shouldReduceMotion ? { opacity: 1 } : { opacity: 0, y: -20 }
-                        }
-                        transition={contentTransition}
-                        className="flex flex-col items-center gap-6"
-                      >
-                        <motion.div
-                          initial={
-                            shouldReduceMotion ? false : { opacity: 0, y: 12 }
-                          }
-                          animate={{ opacity: 1, y: 0 }}
-                          transition={{
-                            ...contentTransition,
-                            delay: shouldReduceMotion ? 0 : 0.05,
-                          }}
-                          className="inline-flex items-center gap-2.5 border border-border px-4 py-2"
-                        >
-                          <span className="size-2 shrink-0 bg-primary" aria-hidden />
-                          <span className="text-sm text-foreground">
-                            {activeImpact.chip}
-                          </span>
-                        </motion.div>
-
-                        <motion.h2
-                          initial={shouldReduceMotion ? false : { opacity: 0, y: 16 }}
-                          animate={{ opacity: 1, y: 0 }}
-                          transition={{
-                            ...contentTransition,
-                            delay: shouldReduceMotion ? 0 : 0.1,
-                          }}
-                          className="max-w-xl font-heading text-3xl tracking-tight text-foreground lg:text-4xl"
-                        >
-                          {activeImpact.title}
-                        </motion.h2>
-                      </motion.div>
-                    </AnimatePresence>
-                  </div>
-
-                  <div className="relative hidden min-h-0 flex-1 overflow-hidden lg:block">
-                    <AnimatePresence mode="popLayout" initial={false}>
-                      <motion.div
-                        key={activeImpact.metricLabel}
-                        initial={
-                          shouldReduceMotion ? false : { opacity: 0, scale: 1.05 }
-                        }
-                        animate={{ opacity: 1, scale: 1 }}
-                        exit={
-                          shouldReduceMotion
-                            ? { opacity: 1 }
-                            : { opacity: 0, scale: 1.02 }
-                        }
-                        transition={imageTransition}
-                        className="absolute inset-0"
-                      >
-                        <ImpactImage
-                          impact={activeImpact}
-                          priority={activeIndex === 0}
-                          sizes="(max-width: 1024px) 100vw, 40vw"
-                          className="object-cover object-center"
-                        />
-                      </motion.div>
-                    </AnimatePresence>
-                  </div>
-
-                  <div className="relative shrink-0 border-t border-border px-6 py-8 lg:px-8">
-                    <AnimatePresence mode="wait" initial={false}>
-                      <motion.div
-                        key={activeImpact.metricLabel}
-                        initial={shouldReduceMotion ? false : { opacity: 0, y: 16 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={
-                          shouldReduceMotion ? { opacity: 1 } : { opacity: 0, y: -12 }
-                        }
-                        transition={{
-                          ...contentTransition,
-                          delay: shouldReduceMotion ? 0 : 0.08,
-                        }}
-                        className="grid gap-6 sm:grid-cols-2"
-                      >
-                        {activeImpact.highlights.map((highlight) => (
-                          <div
-                            key={highlight.title}
-                            className="flex flex-col gap-0 border-l border-primary pl-5 text-left"
-                          >
-                            <p className="font-heading text-base text-foreground sm:text-lg">
-                              {highlight.title}
-                            </p>
-                            <p className="text-sm leading-relaxed text-muted-foreground">
-                              {highlight.description}
-                            </p>
-                          </div>
-                        ))}
-                      </motion.div>
-                    </AnimatePresence>
-                  </div>
-                </div>
+              <div className="relative flex min-h-0 items-center justify-center overflow-hidden bg-muted/20 px-8 py-6">
+                <AnimatePresence mode="wait" initial={false}>
+                  <motion.div
+                    key={activeImpact.metricLabel}
+                    initial={shouldReduceMotion ? false : { opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={shouldReduceMotion ? { opacity: 1 } : { opacity: 0 }}
+                    transition={imageTransition}
+                    className="relative h-full w-full"
+                  >
+                    <ImpactImage
+                      impact={activeImpact}
+                      priority={activeIndex === 0}
+                      sizes="(max-width: 1024px) 100vw, 45vw"
+                      className="object-contain object-center"
+                      objectPosition="center center"
+                    />
+                  </motion.div>
+                </AnimatePresence>
               </div>
             </div>
           </div>

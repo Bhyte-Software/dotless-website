@@ -2,7 +2,6 @@
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { IconSend } from "@tabler/icons-react";
-import Image from "next/image";
 import { useState, type ReactNode } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -103,19 +102,8 @@ const Contact = () => {
   return (
     <section id="contact-us" className="relative w-full overflow-hidden">
       <div className="mx-auto w-full max-w-[1920px]">
-        <div className="grid md:min-h-screen grid-cols-1 lg:grid-cols-2">
-          <div className="relative hidden min-h-full lg:block">
-            <Image
-              src="/assets/hero.webp"
-              alt="Student studying with focus and determination"
-              fill
-              sizes="50vw"
-              className="object-cover object-center"
-            />
-          </div>
-
-          <div className="flex items-center justify-center bg-secondary/10 px-4 py-4 sm:px-10 lg:px-12 lg:py-16">
-            <div className="w-full max-w-lg border border-border bg-background p-6 sm:p-10">
+        <div className="flex min-h-[50vh] items-center justify-center bg-secondary/10 px-4 py-12 sm:px-10 lg:px-12 lg:py-16">
+          <div className="w-full max-w-lg border border-border bg-background p-6 sm:p-10">
               <div className="mb-8 flex flex-col gap-1 md:gap-2">
                 <h2 className="font-heading text-2xl md:text-3xl tracking-tight text-foreground">
                   Send Us a Message
@@ -206,7 +194,6 @@ const Contact = () => {
                   <IconSend className="size-4" aria-hidden />
                 </Button>
               </form>
-            </div>
           </div>
         </div>
       </div>

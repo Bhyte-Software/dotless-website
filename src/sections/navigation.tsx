@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { IconMenu2, IconX } from "@tabler/icons-react";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
+import { useLenis } from "lenis/react";
 import { useCallback, useEffect, useState } from "react";
 
 import { useScrollTo } from "@/hooks/use-scroll-to";
@@ -269,11 +270,29 @@ function MobileMenu({
 
 const Navigation = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+  const lenis = useLenis();
   const closeMobileMenu = useCallback(() => setIsMobileMenuOpen(false), []);
   const toggleMobileMenu = useCallback(
     () => setIsMobileMenuOpen((open) => !open),
     []
   );
+
+  useEffect(() => {
+    const updateScrollState = () => {
+      const scrollY = lenis?.scroll ?? window.scrollY;
+      setIsScrolled(scrollY > 12);
+    };
+
+    updateScrollState();
+
+    if (lenis) {
+      return lenis.on("scroll", updateScrollState);
+    }
+
+    window.addEventListener("scroll", updateScrollState, { passive: true });
+    return () => window.removeEventListener("scroll", updateScrollState);
+  }, [lenis]);
 
   return (
     <header className="fixed top-0 z-50 w-full md:z-20">
@@ -282,7 +301,12 @@ const Navigation = () => {
           aria-label="Main navigation"
           className="relative z-50 md:h-16 h-12 grid w-full grid-cols-1 lg:grid-cols-10"
         >
-          <div className="col-span-4 flex w-full items-center justify-between">
+          <div
+            className={cn(
+              "col-span-4 flex w-full items-center justify-between transition-colors duration-300",
+              isScrolled && "bg-background border-b border-border"
+            )}
+          >
             <LogoLink />
             <HamburgerButton
               isOpen={isMobileMenuOpen}
