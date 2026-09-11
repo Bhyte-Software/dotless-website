@@ -12,13 +12,23 @@ const MENU_LINKS = [
 ] as const;
 
 const SOCIAL_LINKS = [
-  { href: "https://www.facebook.com/", label: "Facebook" },
-  { href: "https://linkedin.com/", label: "LinkedIn" },
-  { href: "https://x.com/", label: "Twitter" },
+  {
+    href: "https://www.facebook.com/profile.php?id=61593747923079",
+    label: "Facebook",
+  },
+  {
+    href: "https://www.linkedin.com/company/dotles-education-services",
+    label: "LinkedIn",
+  },
+  {
+    href: "https://www.instagram.com/dotleseducation",
+    label: "Instagram",
+  },
 ] as const;
 
 const DISCOVER_LINKS = [
   { scrollTo: "services", label: "Services" },
+  { scrollTo: "products", label: "Products" },
   { scrollTo: "about-us", label: "About Us" },
 ] as const;
 

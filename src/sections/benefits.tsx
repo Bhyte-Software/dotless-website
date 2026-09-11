@@ -39,7 +39,7 @@ const BENEFITS = [
     icon: "/assets/diverse-activities.svg",
     title: "Comprehensive Solutions",
     description:
-      "From one-on-one counseling to policy development — support that spans the full educational landscape.",
+      "From counselling and policy advisory to DARA scanners, Verificare OMR, and Addmen CBT software — support across the full education stack.",
     tone: "warm",
   },
   {

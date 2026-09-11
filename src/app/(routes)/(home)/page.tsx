@@ -3,6 +3,7 @@ import Benefits from "@/sections/benefits";
 import Contact from "@/sections/contact";
 import Hero from "@/sections/hero";
 import Impact from "@/sections/impact";
+import Products from "@/sections/products";
 import Services from "@/sections/services";
 import Team from "@/sections/team";
 import Testimonial from "@/sections/testimonial";
@@ -12,6 +13,7 @@ const HomePage = () => {
     <div className="flex flex-col">
       <Hero />
       <Services />
+      <Products />
       <Benefits />
       <Impact />
       <About />

@@ -15,9 +15,9 @@ const INFO_BLOCKS = [
             "Clear educational guidance for students, families, and institutions.",
     },
     {
-        title: "Evidence-Based Practice",
+        title: "Digital Assessment",
         description:
-            "Practical strategies informed by data, assessment, and field experience.",
+            "DARA scanners and Verificare/Addmen OMR and CBT software that make exam marking faster, more accurate, and easier to scale.",
     },
     {
         title: "Whole-School Improvement",
@@ -101,9 +101,10 @@ const Hero = () => {
                                         <span className="text-primary">Better Outcomes</span>
                                     </h1>
                                     <p className="max-w-xl text-sm md:text-base text-muted-foreground text-balance md:text-wrap">
-                                        From student counselling to institutional advisory services,
-                                        DOTLES delivers focused, evidence-based support that helps
-                                        clients make confident decisions and improve results.
+                                        From student counselling and school leadership to DARA
+                                        scanners and OMR/CBT software, DOTLES delivers
+                                        evidence-based support that helps institutions and
+                                        learners improve results.
                                     </p>
                                 </div>
 

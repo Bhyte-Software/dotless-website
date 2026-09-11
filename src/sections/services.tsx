@@ -15,34 +15,39 @@ type ServiceItem =
 const SERVICES = [
   {
     chip: "Measurement & Assessment",
-    title: "Education Measurement and Assessment Solutions",
+    title: "Education Measurement and Digital Assessment Solutions",
     description:
-      "We provide technical and psychometric solutions that strengthen the validity, reliability, and efficiency of assessment systems.",
+      "We engineer reliable, tech-forward measurement and grading frameworks — from psychometric design to the DARA scanners and OMR/CBT software we supply across Africa.",
     items: [
+      {
+        title: "DARA Scanning Hardware",
+        description:
+          "Official African distributor of Lectodara 5,000 and 11,000 high-speed scanners — supply, installation, training, technical support, consultancy, and after-sales service.",
+      },
+      {
+        title: "OMR, CBT and Paper-Setting Software",
+        description:
+          "Verificare and Addmen for bubble-sheet marking, secure computer-based testing, and automated question-paper generation on standard scanners.",
+      },
       {
         title: "Aptitude And Diagnostic Test Prep",
         description:
           "Targeted coaching for Teacher Licensure and Teacher Promotion examinations.",
       },
       {
-        title: "Advanced IT Solutions",
-        description:
-          "Specialized systems for automated reading, marking, and grading of both objective (MCQ) and subjective (essay-type) questions.",
-      },
-      {
         title: "Quality Assurance",
         description:
-          "Designing custom question banks, test item repositories, and anti-bias assessment guidelines.",
+          "Custom question banks, test item repositories, and anti-bias assessment guidelines.",
       },
       {
         title: "Data Analytics",
         description:
-          "Generating detailed psychometric analyses and administrative reports to guide data-driven teaching adjustments.",
+          "Psychometric analyses and administrative reports to guide data-driven teaching adjustments.",
       },
       {
         title: "Integrity Management",
         description:
-          "Deploying robust monitoring protocols to ensure the credibility of examination processes.",
+          "Monitoring protocols that keep examination processes standardized, transparent, and credible.",
       },
     ] satisfies ServiceItem[],
     buttonLabel: "Explore Assessment Solutions",
@@ -53,7 +58,7 @@ const SERVICES = [
     chip: "Leadership & Management",
     title: "Educational Leadership and School Management",
     description:
-      "We support school leaders and institutions with practical frameworks for stronger teaching, governance, and performance.",
+      "We nurture exceptional school management and instructional leadership with practical frameworks for stronger teaching, governance, and performance.",
     items: [
       "Curriculum development, structural review, and instructional design.",
       "Executive school management and instructional leadership training.",
@@ -67,7 +72,7 @@ const SERVICES = [
     chip: "Career & Counselling",
     title: "Career Guidance, Student Counselling and Test Preparation",
     description:
-      "We help students build the skills and confidence needed to navigate key academic transitions.",
+      "We guide student career pathways and support academic transitions with counselling, placement advice, and structured test preparation.",
     items: [
       {
         title: "International Test Prep",
@@ -100,10 +105,10 @@ const SERVICES = [
     imageAlt: "Students receiving career guidance and test preparation support",
   },
   {
-    chip: "TLMs Development",
+    chip: "TLMs & Item Development",
     title: "Teaching Learning Materials (TLMs) Development",
     description:
-      "We improve classroom learning through high-quality instructional resources and practical author development support.",
+      "We author and produce premier, localized learning resources — including item development and practical author support.",
     items: [
       "Development of foundational Literacy and Numeracy materials for KG, Primary, and levels.",
       "Design and production of materials for JHS, SHS, STEM, TVET.",
@@ -133,7 +138,7 @@ const SERVICES = [
     chip: "Policy & Advisory",
     title: "Government, Policy and NGO Advisory",
     description:
-      "We provide advisory support for education policy, programme design, and system-level reforms.",
+      "We conduct rigorous policy and programme reviews and monitoring to support national education reforms.",
     items: [
       "Supply data-driven, empirical evidence to support policy formulation and practice.",
       "Comprehensive evaluation, review, and assessment of educational policies and programmes.",

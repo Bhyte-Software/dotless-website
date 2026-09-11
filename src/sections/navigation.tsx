@@ -37,6 +37,7 @@ const mobileLinkVariants = {
 const NAV_LINKS = [
   { id: "about-us", label: "About Us" },
   { id: "services", label: "Services" },
+  { id: "products", label: "Products" },
   { id: "benefits", label: "Benefits" },
   { id: "impact", label: "Impact" },
 ] as const;

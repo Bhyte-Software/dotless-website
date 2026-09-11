@@ -7,7 +7,7 @@ import { useScrollTo } from "@/hooks/use-scroll-to";
 const STAKEHOLDERS = [
   "Students and student groups",
   "Educational institutions, school heads, and governing boards",
-  "Teachers and academic staff",
+  "Lecturers, teachers, and academic staff",
   "Parents and educational authorities",
   "Government agencies, NGOs, and media personnel",
 ] as const;
@@ -18,6 +18,34 @@ const CORE_VALUES = [
   "Teamwork",
   "Credibility",
   "Hard work",
+] as const;
+
+const OBJECTIVES = [
+  {
+    title: "Educational Leadership",
+    description:
+      "Nurturing exceptional school management and instructional leadership.",
+  },
+  {
+    title: "Modern Assessment Solutions",
+    description:
+      "Engineering reliable, tech-forward measurement and grading frameworks.",
+  },
+  {
+    title: "Holistic Counselling",
+    description:
+      "Guiding student career pathways and supporting academic transitions.",
+  },
+  {
+    title: "Materials Development",
+    description:
+      "Authoring and producing premier, localized learning resources.",
+  },
+  {
+    title: "Policy and Programme Evaluation",
+    description:
+      "Conducting rigorous reviews and monitoring to support national education reforms.",
+  },
 ] as const;
 
 const ROWS = [
@@ -48,8 +76,8 @@ const ROWS = [
       <div className="flex flex-col gap-4 md:gap-5">
         <p className="max-w-3xl text-sm md:text-base text-muted-foreground">
           <span className="font-medium text-foreground">Vision:</span> To be the
-          first choice in educational consulting, empowering clients to "get it
-          right".
+          first choice in educational consulting, empowering institutions to
+          &quot;get it right&quot;.
         </p>
         <p className="max-w-3xl text-sm md:text-base text-muted-foreground">
           <span className="font-medium text-foreground">Mission:</span> To offer
@@ -77,6 +105,35 @@ const ROWS = [
             </span>
           ))}
         </div>
+      </div>
+    ),
+  },
+  {
+    label: "Objectives",
+    tone: "muted",
+    content: (
+      <div className="flex flex-col gap-4 md:gap-5">
+        <p className="max-w-3xl text-sm md:text-base text-muted-foreground">
+          To elevate educational standards and maximize student and
+          institutional outcomes across Ghana and beyond through data-driven
+          expertise in:
+        </p>
+        <ul className="space-y-3">
+          {OBJECTIVES.map((objective) => (
+            <li key={objective.title} className="flex gap-2.5">
+              <span
+                className="mt-2 size-1.5 shrink-0 rounded-full bg-primary"
+                aria-hidden
+              />
+              <span className="text-sm md:text-base text-muted-foreground">
+                <span className="font-medium text-foreground">
+                  {objective.title}:{" "}
+                </span>
+                {objective.description}
+              </span>
+            </li>
+          ))}
+        </ul>
       </div>
     ),
   },
