@@ -6,7 +6,7 @@ import Link from "next/link";
 import { useScrollTo } from "@/hooks/use-scroll-to";
 import { cn } from "@/lib/utils";
 
-const HERO_IMAGE = "/assets/hero.webp";
+const HERO_IMAGE = "/assets/institutional-group.jpg";
 
 const INFO_BLOCKS = [
     {
@@ -80,7 +80,7 @@ const Hero = () => {
                     <div className="relative order-2 h-[68svh] overflow-hidden md:min-h-[min(100vh,760px)] lg:order-1 lg:col-span-4 lg:min-h-[760px] lg:h-screen">
                         <Image
                             src={HERO_IMAGE}
-                            alt="Students receiving expert educational guidance and mentorship"
+                            alt="DOTLES and institutional partners at Ho Technical University"
                             fill
                             priority
                             quality={100}

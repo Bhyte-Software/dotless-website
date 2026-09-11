@@ -51,8 +51,9 @@ const SERVICES = [
       },
     ] satisfies ServiceItem[],
     buttonLabel: "Explore Assessment Solutions",
-    image: "/assets/measurement.webp",
-    imageAlt: "Education measurement and assessment planning",
+    image: "/assets/dara-scanner.png",
+    imageAlt: "DARA high-speed exam scanner used for OMR data capture",
+    imageFit: "contain",
   },
   {
     chip: "Leadership & Management",
@@ -65,8 +66,8 @@ const SERVICES = [
       "Formulation of tailored School Improvement Plans (SIPs) and rigorous School Performance Reviews.",
     ] satisfies ServiceItem[],
     buttonLabel: "Explore Leadership Services",
-    image: "/assets/management.webp",
-    imageAlt: "Educational leadership and school management consultation",
+    image: "/assets/leadership-session.jpg",
+    imageAlt: "Education leaders seated for a DOTLES institutional session",
   },
   {
     chip: "Career & Counselling",
@@ -131,8 +132,8 @@ const SERVICES = [
       "Media interview strategies for CEOs and business executive and team management frameworks.",
     ] satisfies ServiceItem[],
     buttonLabel: "Explore Corporate Training",
-    image: "/assets/corporate.webp",
-    imageAlt: "Corporate training and professional development workshop",
+    image: "/assets/corporate-presentation.jpg",
+    imageAlt: "DOTLES consultant presenting a professional training session",
   },
   {
     chip: "Policy & Advisory",
@@ -146,8 +147,8 @@ const SERVICES = [
       "Provide localized education data and advanced statistical analyses for national educational planning.",
     ] satisfies ServiceItem[],
     buttonLabel: "Explore Policy Advisory",
-    image: "/assets/advisory.webp",
-    imageAlt: "Government and NGO education policy advisory session",
+    image: "/assets/leadership-team.jpg",
+    imageAlt: "DOTLES and institutional partners after an advisory session",
   },
 ] as const;
 
@@ -231,13 +232,13 @@ function ServiceImage({
   service,
   priority,
   sizes,
-  className,
 }: {
   service: (typeof SERVICES)[number];
   priority?: boolean;
   sizes: string;
-  className?: string;
 }) {
+  const contain = "imageFit" in service && service.imageFit === "contain";
+
   return (
     <Image
       src={service.image}
@@ -245,7 +246,11 @@ function ServiceImage({
       fill
       priority={priority}
       sizes={sizes}
-      className={className}
+      className={
+        contain
+          ? "bg-background object-contain object-center p-8"
+          : "object-cover object-center"
+      }
     />
   );
 }
@@ -301,7 +306,6 @@ const Services = () => {
                   service={service}
                   priority={index === 0}
                   sizes="100vw"
-                  className="object-cover object-center"
                 />
               </div>
             </article>
@@ -326,7 +330,6 @@ const Services = () => {
                     service={service}
                     priority={index === 0}
                     sizes="(max-width: 1024px) 100vw, 60vw"
-                    className="object-cover object-center"
                   />
                 </div>
               </div>

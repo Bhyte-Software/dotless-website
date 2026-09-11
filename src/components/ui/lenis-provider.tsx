@@ -23,12 +23,24 @@ function LenisScrollSync() {
     lenis.scrollTo(0, { immediate: true, force: true })
     lenis.start()
 
-    const frame = requestAnimationFrame(() => {
+    const refresh = () => {
       lenis.resize()
       ScrollTrigger.refresh()
-    })
+    }
 
-    return () => cancelAnimationFrame(frame)
+    const frame = requestAnimationFrame(refresh)
+    window.addEventListener("load", refresh)
+    window.addEventListener("resize", refresh)
+
+    const observer = new ResizeObserver(refresh)
+    observer.observe(document.body)
+
+    return () => {
+      cancelAnimationFrame(frame)
+      window.removeEventListener("load", refresh)
+      window.removeEventListener("resize", refresh)
+      observer.disconnect()
+    }
   }, [pathname, lenis])
 
   return null

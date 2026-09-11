@@ -2,9 +2,9 @@ import Image from "next/image";
 
 const Testimonial = () => {
     return (
-        <section className="relative w-full overflow-hidden">
+        <section className="relative w-full">
             <div className="mx-auto w-full max-w-[1920px]">
-                <div className="relative bg-background md:h-screen flex flex-col justify-center items-center px-6 py-16 sm:px-10 sm:py-20 lg:px-16 lg:py-24">
+                <div className="relative flex flex-col items-center justify-center bg-background px-6 py-16 sm:px-10 sm:py-20 lg:px-16 lg:py-24">
                     <div
                         aria-hidden
                         className="absolute inset-y-0 left-0 w-1.5 md:w-3 bg-primary"

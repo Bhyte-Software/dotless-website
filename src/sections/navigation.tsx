@@ -40,6 +40,7 @@ const NAV_LINKS = [
   { id: "products", label: "Products" },
   { id: "benefits", label: "Benefits" },
   { id: "impact", label: "Impact" },
+  { id: "work", label: "Work" },
 ] as const;
 
 const LOGO_IMAGE = "/assets/DOTLES Logo.jpeg";

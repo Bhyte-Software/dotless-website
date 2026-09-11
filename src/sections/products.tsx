@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 
 import { useScrollTo } from "@/hooks/use-scroll-to";
@@ -70,6 +71,8 @@ const PRODUCTS = [
       "Two-tray sorter for pass/fail or valid/invalid, plus LCD screen, document counter, and Evaldara software",
     ],
     tone: "warm",
+    image: "/assets/dara-scanner.png",
+    imageAlt: "DARA Lectodara high-speed document scanner",
   },
   {
     chip: "Hardware",
@@ -83,6 +86,8 @@ const PRODUCTS = [
       "Two-tray sorter, LCD screen, document counter, and Evaldara software included",
     ],
     tone: "muted",
+    image: "/assets/dara-scanner.png",
+    imageAlt: "DARA Lectodara high-speed document scanner",
   },
   {
     chip: "OMR Software",
@@ -96,6 +101,8 @@ const PRODUCTS = [
       "Automatic form recognition, error correction, barcode and OCR, duplicate detection, and secure validation",
     ],
     tone: "muted",
+    image: "/assets/verificare-form.png",
+    imageAlt: "Verificare OMR form on a tablet with ICR and OMR capture",
   },
   {
     chip: "OMR Software",
@@ -109,6 +116,8 @@ const PRODUCTS = [
       "Suited to universities, schools, and large-scale assessments",
     ],
     tone: "warm",
+    image: "/assets/omr-sheet.png",
+    imageAlt: "Hand marking an OMR answer sheet",
   },
   {
     chip: "Online Exams",
@@ -186,17 +195,16 @@ const Products = () => {
               Addmen software for OMR marking, computer-based testing, and
               automated question-paper generation.
             </p>
-          </div>
-
-          <div className="grid grid-cols-2 border-b border-border sm:grid-cols-3 lg:grid-cols-6">
-            {DELIVERY.map((item) => (
-              <p
-                key={item}
-                className="border-b border-r border-border px-4 py-5 text-center font-heading text-sm text-foreground last:border-r-0 sm:nth-[3n]:border-r-0 lg:border-b-0 lg:nth-[3n]:border-r lg:last:border-r-0"
-              >
-                {item}
-              </p>
-            ))}
+            <div className="flex flex-wrap justify-center gap-2">
+              {DELIVERY.map((item) => (
+                <span
+                  key={item}
+                  className="inline-flex items-center border border-border px-3 py-1.5 text-sm text-foreground"
+                >
+                  {item}
+                </span>
+              ))}
+            </div>
           </div>
 
           <div className="border-b border-border px-6 py-10 sm:px-10 lg:px-16">
@@ -255,6 +263,17 @@ const Products = () => {
                   <span className="size-2 shrink-0 bg-primary" aria-hidden />
                   <span className="text-sm text-foreground">{product.chip}</span>
                 </div>
+                {"image" in product && product.image ? (
+                  <div className="relative h-40 w-full overflow-hidden border border-border bg-background">
+                    <Image
+                      src={product.image}
+                      alt={product.imageAlt}
+                      fill
+                      sizes="(max-width: 1024px) 100vw, 40vw"
+                      className="object-contain object-center p-4"
+                    />
+                  </div>
+                ) : null}
                 <div className="flex flex-col gap-3">
                   <h3 className="font-heading text-xl tracking-tight text-foreground md:text-2xl">
                     {product.title}

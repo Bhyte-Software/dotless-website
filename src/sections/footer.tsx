@@ -29,6 +29,7 @@ const SOCIAL_LINKS = [
 const DISCOVER_LINKS = [
   { scrollTo: "services", label: "Services" },
   { scrollTo: "products", label: "Products" },
+  { scrollTo: "work", label: "Our Work" },
   { scrollTo: "about-us", label: "About Us" },
 ] as const;
 

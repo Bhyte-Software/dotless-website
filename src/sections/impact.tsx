@@ -31,8 +31,8 @@ const IMPACTS = [
     metricLabel: "Schools",
     chip: "Institutional Reach",
     title: "Trusted by Schools and Institutions",
-    image: "/assets/impact-1.webp",
-    imageAlt: "School leaders reviewing educational outcomes together",
+    image: "/assets/institutional-group.jpg",
+    imageAlt: "Institutional partners gathered with DOTLES at Ho Technical University",
     highlights: [
       {
         title: "Partnerships",
@@ -51,8 +51,8 @@ const IMPACTS = [
     metricLabel: "Years Experience",
     chip: "Our Legacy",
     title: "Over Three Decades of Educational Consultancy",
-    image: "/assets/impact-2.webp",
-    imageAlt: "Experienced consultants guiding educational strategy",
+    image: "/assets/leadership-team.jpg",
+    imageAlt: "DOTLES consultants with institutional leaders",
     highlights: [
       {
         title: "Sector Expertise",

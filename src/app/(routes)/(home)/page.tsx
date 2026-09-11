@@ -7,6 +7,7 @@ import Products from "@/sections/products";
 import Services from "@/sections/services";
 import Team from "@/sections/team";
 import Testimonial from "@/sections/testimonial";
+import Work from "@/sections/work";
 
 const HomePage = () => {
   return (
@@ -16,6 +17,7 @@ const HomePage = () => {
       <Products />
       <Benefits />
       <Impact />
+      <Work />
       <About />
       <Team />
       <Testimonial />

@@ -32,7 +32,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={cn("h-full", "antialiased", roboto.variable, robotoSerif.variable, "font-sans")}
+      className={cn("antialiased", roboto.variable, robotoSerif.variable, "font-sans")}
     >
       <body className="flex flex-col">
         <LenisProvider>
